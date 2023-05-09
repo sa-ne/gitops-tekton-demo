@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: openshift-pipelines
+  name: openshift-devspaces
   annotations:
     argocd.argoproj.io/compare-options: IgnoreExtraneous
   labels:
@@ -12,7 +12,7 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: gitops/manifests/operators/openshift-pipelines-operator/overlays/latest
+    path: gitops/manifests/operators/openshift-dev-spaces/overlays/stable
     repoURL: https://github.com/sa-ne/gitops-tekton-demo.git
     targetRevision: main
   syncPolicy:
