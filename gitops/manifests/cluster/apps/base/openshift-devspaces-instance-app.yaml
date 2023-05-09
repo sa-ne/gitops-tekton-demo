@@ -1,9 +1,9 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: openshift-devspaces
+  name: openshift-devspaces-instance
   annotations:
-    argocd.argoproj.io/sync-wave: "2"
+    argocd.argoproj.io/sync-wave: "3"
     argocd.argoproj.io/compare-options: IgnoreExtraneous
   labels:
     gitops.ownedBy: default
@@ -13,7 +13,7 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: gitops/manifests/operators/openshift-devspaces-operator/overlays/stable
+    path: gitops/manifests/operators/openshift-devspaces-operator/instance/base
     repoURL: https://github.com/sa-ne/gitops-tekton-demo.git
     targetRevision: main
   syncPolicy:

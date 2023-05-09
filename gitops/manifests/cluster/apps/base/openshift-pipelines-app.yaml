@@ -3,6 +3,7 @@ kind: Application
 metadata:
   name: openshift-pipelines
   annotations:
+    argocd.argoproj.io/sync-wave: "2"
     argocd.argoproj.io/compare-options: IgnoreExtraneous
   labels:
     gitops.ownedBy: default
