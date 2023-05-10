@@ -1,0 +1,37 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: advanced-cluster-security
+  annotations:
+    argocd.argoproj.io/sync-wave: "4"
+    argocd.argoproj.io/compare-options: IgnoreExtraneous
+    platform.stackrox.io/Central:
+  health.lua: |
+    hs = {}
+    if obj.status ~= nil and obj.status.conditions ~= nil then
+      for i, condition in ipairs(obj.status.conditions) do
+        if condition.status == "True" and (condition.reason == "InstallSuccessful" or condition.reason =="UpgradeSuccessful") then
+          hs.status = "Healthy"
+          hs.message = condition.message
+          return hs
+        end
+      end
+    end
+    hs.status = "Progressing"
+    hs.message = "Waiting for Central to deploy."
+    return hs
+  labels:
+    gitops.ownedBy: default
+spec:
+  destination:
+    namespace: openshift-gitops
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: gitops/manifests/operators/advanced-cluster-security-operator/aggregate/minimal
+    repoURL: https://github.com/sa-ne/gitops-tekton-demo.git
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: true
