@@ -12,3 +12,10 @@ patches:
       kind: Central
       name: central
       version: v1alpha1
+  - path: patch-argocd.yaml
+    target:
+      group: argoproj.io
+      kind: ArgoCD
+      name: openshift-gitops
+      version: v1alpha1
+      #namespace: openshift-gitops
