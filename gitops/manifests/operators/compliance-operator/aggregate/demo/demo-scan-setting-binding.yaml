@@ -1,15 +1,15 @@
 apiVersion: compliance.openshift.io/v1alpha1
 kind: ScanSettingBinding
 metadata:
-  name: demo-compliance-requirements
+  name: cis-compliance
 profiles:
-  - apiGroup: compliance.openshift.io/v1alpha1
+  - name: ocp4-cis-node
     kind: Profile
-    name: rhcos4-moderate
-  - apiGroup: compliance.openshift.io/v1alpha1
+    apiGroup: compliance.openshift.io/v1alpha1
+  - name: ocp4-cis
     kind: Profile
-    name: ocp4-moderate
+    apiGroup: compliance.openshift.io/v1alpha1
 settingsRef:
-  apiGroup: compliance.openshift.io/v1alpha1
+  name: default
   kind: ScanSetting
-  name: demo
+  apiGroup: compliance.openshift.io/v1alpha1
