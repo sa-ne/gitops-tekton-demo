@@ -9,5 +9,5 @@ commonAnnotations:
   argocd.argoproj.io/sync-wave: "5"
 
 resources:
-  - ../../operator/overlays/stable
+  - ../../operator/overlays/release-0.1
   - demo-scan-setting-binding.yaml
