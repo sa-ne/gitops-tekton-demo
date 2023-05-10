@@ -1,6 +1,12 @@
-- op: add
-  path: /spec/resourceCustomizations
-  value:
+apiVersion: argoproj.io/v1alpha1
+kind: ArgoCD
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: Validate=false,ServerSideApply=true
+  name: openshift-gitops
+  namespace: openshift-gitops
+spec:
+  resourceCustomizations: |
     platform.stackrox.io/Central:
       health.lua: |
         hs = {}
