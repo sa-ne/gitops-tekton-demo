@@ -44,6 +44,6 @@ spec:
     useInternalClusterSVCNames: false
     workspaceNamespaceDefault: <username>-devspaces
   storage:
-    preCreateSubPaths: true
+    preCreateSubPaths: false
     pvcClaimSize: 10Gi
     pvcStrategy: common
