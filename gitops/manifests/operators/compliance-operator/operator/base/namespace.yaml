@@ -3,7 +3,6 @@ kind: Namespace
 metadata:
   labels:
     openshift.io/cluster-monitoring: "true"
-    pod-security.kubernetes.io/enforce: privileged
   annotations:
     openshift.io/display-name: OpenShift Compliance Operator
   name: openshift-compliance
