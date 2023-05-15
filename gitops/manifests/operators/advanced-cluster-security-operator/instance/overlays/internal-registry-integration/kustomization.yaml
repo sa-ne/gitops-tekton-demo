@@ -4,6 +4,9 @@ kind: Kustomization
 
 namespace: stackrox
 
+commonAnnotations:
+  argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+
 resources:
   - ../../base
   - stackrox-image-puller-sa.yaml
