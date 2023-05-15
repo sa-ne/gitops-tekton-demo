@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - subscription.yaml
   - clusterrolebinding-admin.yaml
+  - admin-group.yaml
