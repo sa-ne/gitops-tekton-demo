@@ -7,4 +7,4 @@ resources:
   - pipeline-rbac.yaml
   - stackrox-ci-secrets-task.yaml
   - token-secret-pipeline.yaml
-  - token-secret-pipelinerun.yaml
+  - token-secret-triggertemplate.yaml
