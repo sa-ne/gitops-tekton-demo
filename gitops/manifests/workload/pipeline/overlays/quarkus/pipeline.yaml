@@ -123,7 +123,7 @@ spec:
           value: json
         - name: image
           value: >-
-            image-registry.openshift-image-registry.svc:5000/meat-helper-cicd-test/meat-helper:latest
+            image-registry.openshift-image-registry.svc:5000/demo-quarkus-pipeline/meat-helper:latest
       runAfter:
         - build-image
       taskRef:
@@ -133,7 +133,7 @@ spec:
       params:
         - name: image
           value: >-
-            image-registry.openshift-image-registry.svc:5000/meat-helper-cicd-test/meat-helper:latest
+            image-registry.openshift-image-registry.svc:5000/demo-quarkus-pipeline/meat-helper:latest
         - name: rox_api_token
           value: roxsecrets
         - name: rox_central_endpoint
