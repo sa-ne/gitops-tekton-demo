@@ -12,7 +12,7 @@ metadata:
 spec:
   to:
     kind: Service
-    name: quarkus-pipeline-event-listener
+    name: el-quarkus-pipeline-event-listener
     weight: 100
   port:
     targetPort: 8080
