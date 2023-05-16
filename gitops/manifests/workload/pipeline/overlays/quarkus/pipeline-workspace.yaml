@@ -3,6 +3,9 @@ apiVersion: v1
 metadata:
   name: meat-helper-cicd-pvc
   namespace: demo-quarkus-pipeline
+  annotations:
+    argocd.argoproj.io/sync-options: |
+      { "health": false }
 spec:
   accessModes:
     - ReadWriteOnce
