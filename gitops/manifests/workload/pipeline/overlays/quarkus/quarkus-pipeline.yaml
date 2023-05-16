@@ -1,8 +1,8 @@
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
-  name: meat-helper-pipeline
-  namespace: meat-helper-cicd-test
+  name: quarkus-pipeline
+  namespace: demo-quarkus-pipeline
 spec:
   finally:
     - name: clean-env
@@ -12,6 +12,7 @@ spec:
             oc delete bc meat-helper
 
             oc delete is meat-helper
+
             rm -rf image-build
         - name: VERSION
           value: latest
@@ -62,6 +63,8 @@ spec:
           value:
             - package
             - '-Dmaven.test.skip=true'
+            - '-Dquarkus.container-image.push=false'
+            - '-Dquarkus.container-image.build=false'
         - name: MAVEN_MIRROR_URL
           value: ''
         - name: SERVER_USER
@@ -92,6 +95,26 @@ spec:
           workspace: meat-helper-cicd-pvc
         - name: maven-settings
           workspace: maven-settings
+    - name: push-build-artifact
+      params:
+        - name: SCRIPT
+          value: >-
+            echo "Pushing targets to artifact repository"
+
+            echo "Push
+            /workspace/manifest-dir/src/target/quarkus-meat-helper-1.0.0-SNAPSHOT.jar"
+
+            echo "Target succesfully pushed"
+        - name: VERSION
+          value: latest
+      runAfter:
+        - build-app
+      taskRef:
+        kind: ClusterTask
+        name: openshift-client
+      workspaces:
+        - name: manifest-dir
+          workspace: meat-helper-cicd-pvc
     - name: build-image
       params:
         - name: SCRIPT
@@ -103,10 +126,13 @@ spec:
             src/src/main/docker/Dockerfile.jvm image-build/Dockerfile
 
             oc start-build meat-helper --from-dir=image-build --follow
+
+            oc tag meat-helper:latest meat-helper:latest
+            meat-helper:$(params.OUTPUT_TAG)
         - name: VERSION
           value: latest
       runAfter:
-        - build-app
+        - push-build-artifact
       taskRef:
         kind: ClusterTask
         name: openshift-client
@@ -123,7 +149,7 @@ spec:
           value: json
         - name: image
           value: >-
-            image-registry.openshift-image-registry.svc:5000/demo-quarkus-pipeline/meat-helper:latest
+            image-registry.openshift-image-registry.svc:5000/demo-quarkus-pipeline/meat-helper:$(params.OUTPUT_TAG)
       runAfter:
         - build-image
       taskRef:
@@ -133,7 +159,7 @@ spec:
       params:
         - name: image
           value: >-
-            image-registry.openshift-image-registry.svc:5000/demo-quarkus-pipeline/meat-helper:latest
+            image-registry.openshift-image-registry.svc:5000/demo-quarkus-pipeline/meat-helper:$(params.OUTPUT_TAG)
         - name: rox_api_token
           value: roxsecrets
         - name: rox_central_endpoint
@@ -143,6 +169,25 @@ spec:
       taskRef:
         kind: Task
         name: acs-image-check
+    - name: push-image
+      params:
+        - name: srcImageURL
+          value: >-
+            docker://image-registry.openshift-image-registry.svc:5000/demo-quarkus-pipeline/meat-helper:$(params.OUTPUT_TAG)
+        - name: destImageURL
+          value: 'docker://quay.io/stauil/quarkus-meat-helper:$(params.OUTPUT_TAG)'
+        - name: srcTLSverify
+          value: 'false'
+        - name: destTLSverify
+          value: 'true'
+      runAfter:
+        - acs-image-check
+      taskRef:
+        kind: ClusterTask
+        name: skopeo-copy
+      workspaces:
+        - name: images-url
+          workspace: meat-helper-cicd-pvc
   workspaces:
     - name: meat-helper-cicd-pvc
     - name: maven-settings
