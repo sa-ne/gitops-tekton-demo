@@ -120,13 +120,15 @@ spec:
 
               echo "Central API endpoint for image integrations: $CENTRAL_URL$API"
 
+              ENDPOINT=$CENTRAL_URL$API
+
+              echo $ENDPOINT
 
               echo "Getting default image integrations list."
 
               curl -k -o /tmp/imageintegrations.json \
                   -X GET -u "admin:$PASSWORD" \
-                  -H "Content-Type: application/json" \
-                  $CENTRAL_URL$API
+                  -H "Content-Type: application/json" $ENDPOINT
 
               echo "Parsing and updating internal registry integrations."
 
