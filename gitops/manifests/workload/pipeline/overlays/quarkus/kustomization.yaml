@@ -11,3 +11,4 @@ resources:
   - quarkus-pipeline-trigger-binding.yaml
   - quarkus-pipeline-event-listener.yaml
   - quarkus-pipeline-webhook-route.yaml
+  - source-workspace.yaml
