@@ -128,7 +128,7 @@ spec:
 
               curl -k -o /tmp/imageintegrations.json \
                   -X GET -u "admin:$PASSWORD" \
-                  -H "Content-Type: application/json" $ENDPOINT
+                  -H "Content-Type: application/json" "$ENDPOINT"
 
               echo "Parsing and updating internal registry integrations."
 
