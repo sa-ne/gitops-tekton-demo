@@ -6,4 +6,8 @@ resources:
   - ../../base
   - acs-image-check.yaml
   - acs-image-scan.yaml
-  
+  - quarkus-pipeline.yaml
+  - quarkus-pipeline-triggertemplate.yaml
+  - quarkus-pipeline-trigger-binding.yaml
+  - quarkus-pipeline-event-listener.yaml
+  - quarkus-pipeline-webhook-route.yaml
