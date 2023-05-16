@@ -12,4 +12,3 @@ resources:
   - quarkus-pipeline-event-listener.yaml
   - quarkus-pipeline-webhook-route.yaml
   - source-workspace.yaml
-  - pipeline-workspace.yaml
