@@ -4,8 +4,8 @@ metadata:
   name: meat-helper-cicd-pvc
   namespace: demo-quarkus-pipeline
   annotations:
-    argocd.argoproj.io/sync-options: |
-      { "health": false }
+    argocd.argoproj.io/sync-options: { "health": false }
+    argocd.argoproj.io/sync-options: { "prune": false }
 spec:
   accessModes:
     - ReadWriteOnce

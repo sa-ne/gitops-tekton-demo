@@ -4,8 +4,8 @@ metadata:
   name: source-workspace
   namespace: demo-quarkus-pipeline
   annotations:
-    argocd.argoproj.io/sync-options: |
-      { "health": false }
+    argocd.argoproj.io/sync-options: { "health": false }
+    argocd.argoproj.io/sync-options: { "prune": false }
 spec:
   accessModes:
     - ReadWriteOnce
