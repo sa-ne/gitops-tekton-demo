@@ -5,7 +5,7 @@ metadata:
   namespace: demo-quarkus-pipeline
   annotations:
     argocd.argoproj.io/sync-options: { "health": false }
-    argocd.argoproj.io/sync-options: { "prune": false }
+    argocd.argoproj.io/automated: "false"
 spec:
   accessModes:
     - ReadWriteOnce
