@@ -11,7 +11,6 @@ spec:
   backoffLimit: 6
   template:
     metadata:
-      creationTimestamp: null
       labels:
         job-name: updated-image-integration-creds
     spec:
@@ -124,8 +123,7 @@ spec:
 
               echo "Getting default image integrations list."
 
-              curl -k -o \
-                  /tmp/imageintegrations.json \
+              curl -k -o /tmp/imageintegrations.json \
                   -X GET -u "admin:$PASSWORD" \
                   -H "Content-Type: application/json" \
                   $CENTRAL_URL$API
