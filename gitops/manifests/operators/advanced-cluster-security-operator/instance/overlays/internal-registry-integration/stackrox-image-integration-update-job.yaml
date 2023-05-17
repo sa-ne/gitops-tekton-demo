@@ -5,6 +5,9 @@ metadata:
   namespace: stackrox
   labels:
     app.kubernetes.io/instance: advanced-cluster-security
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: '5'
 spec:
   parallelism: 1
   completions: 1
