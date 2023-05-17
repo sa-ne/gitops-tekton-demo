@@ -9,7 +9,7 @@ commonAnnotations:
 
 resources:
   - ../../base
+  - stackrox-image-integration-update-job-sa.yaml
   - stackrox-image-puller-sa.yaml
   - stackrox-image-puller-token-secret.yaml
-  - stackrox-image-integration-update-job-sa.yaml
   - stackrox-image-integration-update-job.yaml
