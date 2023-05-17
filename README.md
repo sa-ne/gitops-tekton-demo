@@ -16,6 +16,17 @@ Once the operator is installed, we use the App of Apps pattern to initiate the i
 oc create -k gitops/manifests/cluster/bootstrap/base
 ```
 
+In order to push the created image during the pipeline to quay.io you have to create a robot account for your repo on quay and use the provided username and password to create a secret and link it to the ServiceAccount.
+
+```
+oc create secret docker-registry quay-registry --docker-server=quay.io --docker-username=<robot-username> --docker-password=<password-token> --docker-email=<email> -n demo-quarkus-pipeline
+```
+
+Then link it to the proper ServiceAccount created to run the pipeline.
+
+```
+oc secrets link pipeline quay-registry --for=pull -n demo-quarkus-pipeline
+```
 ### Idea and execution
 
 The workflow starts with DevSpaces where you can execute the demo application that is quarkus based by executing `./mvnw quarkus:dev`. It runs and exposes the applicationfor testing and prototyping. When you are done with coding it's a matter of pushing the code to the [github repository](https://github.com/samueltauil/quarkus-meat-helper) (feel free to fork it and change on your own version) and the pipeline will be triggered.
