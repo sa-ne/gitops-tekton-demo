@@ -25,7 +25,7 @@ oc create secret docker-registry quay-registry --docker-server=quay.io --docker-
 Then link it to the proper ServiceAccount created to run the pipeline.
 
 ```
-oc secrets link pipeline quay-registry --for=pull -n demo-quarkus-pipeline
+oc secrets link pipeline quay-registry --for=pull,mount -n demo-quarkus-pipeline
 ```
 ### Idea and execution
 
