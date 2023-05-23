@@ -3,5 +3,3 @@ kind: OperatorGroup
 metadata:
   name: openshift-compliance
   namespace: openshift-compliance
-spec:
-  upgradeStrategy: Default
