@@ -3,6 +3,8 @@ kind: Kustomization
 
 resources:
   - ../../base
+  - admin-group.yaml
+
 
 patches:
   - target:
