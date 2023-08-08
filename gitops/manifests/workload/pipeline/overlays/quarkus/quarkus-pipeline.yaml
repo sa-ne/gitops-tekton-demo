@@ -179,7 +179,7 @@ spec:
         - name: srcTLSverify
           value: 'false'
         - name: destTLSverify
-          value: 'true'
+          value: 'false'
       runAfter:
         - acs-image-check
       taskRef:
