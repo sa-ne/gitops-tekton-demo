@@ -175,7 +175,7 @@ spec:
           value: >-
             docker://image-registry.openshift-image-registry.svc:5000/demo-quarkus-pipeline/meat-helper:$(params.OUTPUT_TAG)
         - name: destImageURL
-          value: 'docker://quay-registry.apps.p32.sandbox1680.opentlc.com/dev_demo-quarkus-pipeline/quarkus-meat-helper:$(params.OUTPUT_TAG)'
+          value: 'docker://quay-registry.apps.cluster-rht8s.rht8s.sandbox131.opentlc.com/meat-helper/demo:$(params.OUTPUT_TAG)'
         - name: srcTLSverify
           value: 'false'
         - name: destTLSverify
